@@ -33,7 +33,7 @@ Extras opcionales:
 
 - ``[gui]`` — Streamlit, para ``streamlit run streamlit_app.py``
 - ``[dev]`` — pytest, build, twine
-- ``[docs]`` — Sphinx, Furo, rst2pdf
+- ``[docs]`` — Sphinx, Furo, rinohtype
 
 Nombre PyPI vs import
 ---------------------
