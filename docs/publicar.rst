@@ -1,6 +1,14 @@
 Construir HTML, PDF y GitHub Pages
 ==================================
 
+Los comandos de **PyPI, Docker Hub y EC2** están en la raíz del
+repositorio (no se copian aquí para no duplicar versiones):
+
+* ``PUBLICAR_PYPI.md`` — ensayo en TestPyPI y luego PyPI. Solo se
+  publica ``src/bohr_h_andresdperezc/``.
+* ``DESPLIEGUE.md`` — ``docker push``, EC2 (puerto 8501, sin
+  contraseña) y GitHub Pages.
+
 Instale las herramientas de documentación una vez::
 
    python -m pip install -e ".[docs]"

@@ -83,6 +83,11 @@ sphinx-build -b rinoh docs docs/_build/rinoh
 HTML: `docs/_build/html/index.html`. PDF: `docs/_build/rinoh/bohr-h-andresdperezc.pdf`.
 GitHub Pages: ver `docs/publicar.rst` (el autor publica el sitio).
 
+## Publicar (lo hace el autor)
+
+- PyPI: [`PUBLICAR_PYPI.md`](PUBLICAR_PYPI.md) (primero TestPyPI).
+- Docker Hub, EC2 (puerto 8501, sin contraseña) y GitHub Pages: [`DESPLIEGUE.md`](DESPLIEGUE.md).
+
 ## Autor
 
 Andrés David Pérez Criollo — adperezc@udistrital.edu.co
