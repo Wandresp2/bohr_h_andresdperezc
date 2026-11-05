@@ -7,6 +7,8 @@ Uso rápido::
     h = BohrAtom(Z=1)
     print(h.energia(1), h.radio(1))
     print(h.transicion(3, 2))
+    h.graficar_niveles(5, transiciones=[(3, 2)])
+    h.graficar_orbitas(4)
 """
 
 from .core import BohrAtom, Transicion

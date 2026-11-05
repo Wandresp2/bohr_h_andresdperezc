@@ -1,9 +1,23 @@
 """Pruebas de la física de Bohr. Ejecutar con: pytest -v"""
 
+import matplotlib
+
+matplotlib.use("Agg")
+
 import numpy as np
 import pytest
+from matplotlib.figure import Figure
+from matplotlib.patches import Circle
 
 from bohr_h_andresdperezc import BohrAtom, Transicion
+
+
+@pytest.fixture(autouse=True)
+def _cerrar_figuras():
+    yield
+    import matplotlib.pyplot as plt
+
+    plt.close("all")
 
 
 def test_energia_fundamental_hidrogeno():
@@ -78,3 +92,39 @@ def test_n_invalido(n):
 def test_transicion_al_mismo_nivel():
     with pytest.raises(ValueError):
         BohrAtom(1).transicion(2, 2)
+
+
+def test_graficar_niveles_devuelve_figura():
+    figura = BohrAtom(1).graficar_niveles(5)
+    assert isinstance(figura, Figure)
+    assert len(figura.axes) == 1
+
+
+def test_graficar_orbitas_devuelve_figura():
+    figura = BohrAtom(1).graficar_orbitas(4)
+    assert isinstance(figura, Figure)
+    circulos = [parche for parche in figura.axes[0].patches if isinstance(parche, Circle)]
+    assert len(circulos) == 5
+
+
+def test_graficar_niveles_con_transiciones():
+    h = BohrAtom(1)
+    figura = h.graficar_niveles(5, transiciones=[(3, 2), (2, 4)])
+    assert isinstance(figura, Figure)
+    figura_objeto = h.graficar_niveles(4, transiciones=h.transicion(3, 2))
+    assert isinstance(figura_objeto, Figure)
+    figura_par = h.graficar_niveles(3, transiciones=(3, 2))
+    assert isinstance(figura_par, Figure)
+
+
+def test_graficar_n_max_invalido():
+    h = BohrAtom(1)
+    with pytest.raises(ValueError):
+        h.graficar_niveles(0)
+    with pytest.raises(ValueError):
+        h.graficar_orbitas(1.5)
+
+
+def test_graficar_transicion_fuera_de_rango():
+    with pytest.raises(ValueError):
+        BohrAtom(1).graficar_niveles(3, transiciones=[(4, 2)])
