@@ -48,6 +48,30 @@ streamlit run streamlit_app.py
 
 Abra http://localhost:8501. Sliders: \(Z\) de 1 a 10, \(n\) de 1 a 8.
 
+## Docker
+
+Cualquier sistema operativo con Docker abre la misma GUI en el navegador (no usa Tkinter).
+
+```bash
+docker build -t andresperez3/bohr-h-andresdperezc:0.1.0 .
+docker run --rm -p 8501:8501 andresperez3/bohr-h-andresdperezc:0.1.0
+```
+
+Abra http://localhost:8501.
+
+El `docker push` a Docker Hub (usuario `andresperez3`) lo hace el autor:
+
+```bash
+docker push andresperez3/bohr-h-andresdperezc:0.1.0
+```
+
+Después, en otra máquina:
+
+```bash
+docker pull andresperez3/bohr-h-andresdperezc:0.1.0
+docker run --rm -p 8501:8501 andresperez3/bohr-h-andresdperezc:0.1.0
+```
+
 ## Documentación (Sphinx)
 
 ```powershell

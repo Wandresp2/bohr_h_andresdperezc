@@ -43,5 +43,5 @@ el Security Group abre TCP 8501 a internet, **sin contraseña** (decisión
 del proyecto). No conviene dejarla encendida 24/7 si no se está
 mostrando.
 
-El ``Dockerfile`` se añade en la fase de empaquetado Docker del
-repositorio.
+El ``Dockerfile`` está en la raíz del repositorio. Streamlit escucha
+en ``0.0.0.0:8501`` (imprescindible para Docker y EC2).

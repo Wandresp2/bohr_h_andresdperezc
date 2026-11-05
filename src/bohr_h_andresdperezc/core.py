@@ -27,31 +27,28 @@ def _entero_positivo(valor, nombre):
 
 @dataclass(frozen=True)
 class Transicion:
-    """Resultado de una transición electrónica n_inicial → n_final.
-
-    Attributes
-    ----------
-    n_inicial, n_final : int
-        Niveles de origen y destino.
-    delta_e : float
-        E(n_final) − E(n_inicial) en eV. Negativo en emisión.
-    energia_foton : float
-        |ΔE| en eV.
-    frecuencia : float
-        Frecuencia del fotón en Hz.
-    longitud_onda : float
-        Longitud de onda del fotón en nm.
-    tipo : str
-        ``"emision"`` si n_inicial > n_final; ``"absorcion"`` en caso contrario.
-    """
+    """Resultado de una transición electrónica n_inicial → n_final."""
 
     n_inicial: int
+    """Nivel de origen."""
+
     n_final: int
+    """Nivel de destino."""
+
     delta_e: float
+    """E(n_final) − E(n_inicial) en eV. Negativo en emisión."""
+
     energia_foton: float
+    """Energía del fotón (valor absoluto de delta_e) en eV."""
+
     frecuencia: float
+    """Frecuencia del fotón en Hz."""
+
     longitud_onda: float
+    """Longitud de onda del fotón en nm."""
+
     tipo: str
+    """``emision`` si n_inicial > n_final; ``absorcion`` en caso contrario."""
 
 
 class BohrAtom:
@@ -68,13 +65,31 @@ class BohrAtom:
 
     # Valores de libro (didácticos). Hay que validar el desarrollo si se expande.
     ENERGIA_RYDBERG_EV = 13.6
+    """Energía de Rydberg didáctica en eV."""
+
     RADIO_BOHR_A = 0.529
+    """Radio de Bohr :math:`a_0` en Å."""
+
     PLANCK_J_S = 6.62607015e-34
+    """Constante de Planck en J·s."""
+
     VELOCIDAD_LUZ_M_S = 299792458.0
+    """Velocidad de la luz en m/s."""
+
     MASA_ELECTRON_KG = 9.1093837139e-31
+    """Masa del electrón en kg."""
+
     CARGA_ELEMENTAL_C = 1.602176634e-19
+    """Carga elemental en C (también convierte eV a J)."""
 
     def __init__(self, Z=1):
+        """Crea un átomo hidrogenoide de número atómico ``Z``.
+
+        Raises
+        ------
+        ValueError
+            Si ``Z`` no es un entero ≥ 1.
+        """
         self._z = _entero_positivo(Z, "Z")
 
     @property
@@ -83,23 +98,53 @@ class BohrAtom:
         return self._z
 
     def energia(self, n):
-        """Energía del nivel ``n`` en eV: E_n = −13.6 Z² / n²."""
+        """Energía del nivel ``n`` en eV: :math:`E_n = -13.6 Z^2 / n^2`.
+
+        Returns
+        -------
+        float
+
+        Raises
+        ------
+        ValueError
+            Si ``n`` no es un entero ≥ 1.
+        """
         n = _entero_positivo(n, "n")
         return -self.ENERGIA_RYDBERG_EV * (self._z**2) / (n**2)
 
     def radio(self, n):
-        """Radio de la órbita ``n`` en Å: r_n = n² a₀ / Z."""
+        """Radio de la órbita ``n`` en Å: :math:`r_n = n^2 a_0 / Z`.
+
+        Returns
+        -------
+        float
+
+        Raises
+        ------
+        ValueError
+            Si ``n`` no es un entero ≥ 1.
+        """
         n = _entero_positivo(n, "n")
         return (n**2) * self.RADIO_BOHR_A / self._z
 
     def energias(self, n_max):
-        """Energías de n = 1 … n_max en eV (arreglo de NumPy)."""
+        """Energías de n = 1 … n_max en eV (arreglo de NumPy).
+
+        Returns
+        -------
+        numpy.ndarray
+        """
         n_max = _entero_positivo(n_max, "n_max")
         niveles = np.arange(1, n_max + 1)
         return -self.ENERGIA_RYDBERG_EV * (self._z**2) / (niveles**2)
 
     def radios(self, n_max):
-        """Radios de n = 1 … n_max en Å (arreglo de NumPy)."""
+        """Radios de n = 1 … n_max en Å (arreglo de NumPy).
+
+        Returns
+        -------
+        numpy.ndarray
+        """
         n_max = _entero_positivo(n_max, "n_max")
         niveles = np.arange(1, n_max + 1)
         return (niveles**2) * self.RADIO_BOHR_A / self._z
@@ -107,8 +152,17 @@ class BohrAtom:
     def transicion(self, n_inicial, n_final):
         """Transición n_inicial → n_final: ΔE, frecuencia y longitud de onda.
 
-        El fotón tiene energía |ΔE|. Si el electrón baja de nivel es emisión;
-        si sube, absorción.
+        El fotón tiene energía :math:`|\\Delta E|`. Si el electrón baja de
+        nivel es emisión; si sube, absorción.
+
+        Returns
+        -------
+        Transicion
+
+        Raises
+        ------
+        ValueError
+            Si los niveles no son enteros ≥ 1 o si son iguales.
         """
         n_inicial = _entero_positivo(n_inicial, "n_inicial")
         n_final = _entero_positivo(n_final, "n_final")
