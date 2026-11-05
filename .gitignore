@@ -7,5 +7,6 @@ dist/
 build/
 .pytest_cache/
 .ipynb_checkpoints/
+examples/*.png
 .mypy_cache/
 *.log

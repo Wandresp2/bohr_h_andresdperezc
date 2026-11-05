@@ -28,9 +28,14 @@ pip install bohr-h-andresdperezc
 from bohr_h_andresdperezc import BohrAtom
 
 hidrogeno = BohrAtom(Z=1)
-helio_ionizado = BohrAtom(Z=2)
-print(hidrogeno.Z, hidrogeno.ENERGIA_RYDBERG_EV)
+print(hidrogeno.energia(1), hidrogeno.radio(1))
+print(hidrogeno.transicion(3, 2))
 ```
+
+## Ejemplos (sin Streamlit)
+
+- `python ejemplo_consola.py` — cálculos en terminal y figuras PNG en `examples/`.
+- `examples/notebook_didactico.ipynb` — teoría breve y llamadas a la librería.
 
 ## Autor
 
