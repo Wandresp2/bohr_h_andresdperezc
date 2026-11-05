@@ -37,6 +37,17 @@ print(hidrogeno.transicion(3, 2))
 - `python ejemplo_consola.py` — cálculos en terminal y figuras PNG en `examples/`.
 - `examples/notebook_didactico.ipynb` — teoría breve y llamadas a la librería.
 
+## GUI (Streamlit, opcional)
+
+La interfaz **no forma parte del paquete**. Instálela solo si quiere jugar en el navegador:
+
+```powershell
+python -m pip install -e ".[gui]"
+streamlit run streamlit_app.py
+```
+
+Abra http://localhost:8501. Sliders: \(Z\) de 1 a 10, \(n\) de 1 a 8.
+
 ## Autor
 
 Andrés David Pérez Criollo — adperezc@udistrital.edu.co
