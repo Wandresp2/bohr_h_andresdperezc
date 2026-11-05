@@ -48,6 +48,17 @@ streamlit run streamlit_app.py
 
 Abra http://localhost:8501. Sliders: \(Z\) de 1 a 10, \(n\) de 1 a 8.
 
+## Documentación (Sphinx)
+
+```powershell
+python -m pip install -e ".[docs]"
+sphinx-build -b html docs docs/_build/html
+sphinx-build -b rinoh docs docs/_build/rinoh
+```
+
+HTML: `docs/_build/html/index.html`. PDF: `docs/_build/rinoh/bohr-h-andresdperezc.pdf`.
+GitHub Pages: ver `docs/publicar.rst` (el autor publica el sitio).
+
 ## Autor
 
 Andrés David Pérez Criollo — adperezc@udistrital.edu.co

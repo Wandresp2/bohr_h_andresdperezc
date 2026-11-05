@@ -29,7 +29,7 @@ dependencies = [
 [project.optional-dependencies]
 gui = ["streamlit>=1.28"]
 dev = ["pytest>=7", "build", "twine"]
-docs = ["sphinx", "furo", "myst-parser"]
+docs = ["sphinx", "furo", "myst-parser", "rinohtype", "ziamath"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

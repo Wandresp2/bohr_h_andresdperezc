@@ -10,3 +10,4 @@ build/
 examples/*.png
 .mypy_cache/
 *.log
+docs/_build/
